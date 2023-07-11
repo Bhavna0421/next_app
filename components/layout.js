@@ -1,8 +1,7 @@
-import Head from "next/head";
 import Image from "next/image";
-import styles from "./layout.module.css";
-import utilStyles from "../pages/styles/utils.module.css";
 import Link from "next/link";
+import utilStyles from "../pages/styles/utils.module.css";
+import styles from "./layout.module.css";
 
 const name = "Meditating Tree";
 export const siteTitle = "Meditating tree blog";
