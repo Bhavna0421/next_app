@@ -33,3 +33,15 @@ export function getSortedPostsData() {
     }
   });
 }
+
+
+// The following function is shared
+// with getStaticProps and API routes
+export async function loadPosts() {
+  // Call an external API endpoint to get posts
+  const res = await fetch('https://dummyjson.com/carts')
+  const data = await res.json()
+//  console.log("data>>>?????????>>>>>>>>>>>>",data.carts[0].products)
+  return data.carts[0].products
+  
+}

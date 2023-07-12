@@ -2,18 +2,17 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "./styles/utils.module.css";
 import React from "react";
-import { getSortedPostsData } from "../components/lib/posts";
+import {  loadPosts ,} from "../components/lib/posts";
+
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
+  const posts = await loadPosts();
+
+  // Props returned will be passed to the page component
+  return { props: { posts } };
 }
 
-export default function Home({allPostsData}) {
+export default function Home({ posts }) {
   return (
     <Layout home>
       <Head>
@@ -30,17 +29,19 @@ export default function Home({allPostsData}) {
       </section>
 
       {/* static data  get static props */}
-      {/* Add this <section> tag below the existing <section> tag */}
+      
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              {title}
-              <br />
-              {date}
-            </li>
-          ))}
+          {posts.map(({ id, date, title }) => {
+            return (
+              <li className={utilStyles.listItem} key={id}>
+                {title}
+                <br />
+                {date}
+              </li>
+            );
+          })}
         </ul>
       </section>
     </Layout>
